@@ -3,6 +3,12 @@
 ## 📌 Project Overview
 This project delivers a comprehensive Business Intelligence solution designed to track, analyze, and optimize the global sales operations of **AdventureWorks**, a multinational manufacturing company specializing in cycling equipment, accessories, and apparel. Utilizing multi-year transaction data (2015–2017), this solution transforms complex transactional ecosystems into an interactive asset to support supply chain management, regional market expansions, and product lifecycle strategies.
 
+---
+
+<img width="1385" height="781" alt="image" src="https://github.com/user-attachments/assets/14ff4c11-143b-4059-91b0-b2090493f0e1" />
+
+---
+
 ## 🛠️ Tools & Technologies
 * **BI Platform:** Microsoft Power BI / Excel
 * **Data Modeling:** Extended Star Schema (Snowflake elements for Product Hierarchies)
