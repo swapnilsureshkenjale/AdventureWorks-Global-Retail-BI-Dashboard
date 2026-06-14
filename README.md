@@ -49,10 +49,10 @@ The relationship flow moves seamlessly from lookups (Dimension Tables) down into
 Through full integration of the relational schema, the business performance across the active lifecycle yields the following key baselines:
 
 ### 💰 Core Financial Performance
-* **Total Sales Revenue:** `$24,914,586.82`
-* **Total Production Cost:** `$14,456,871.39`
-* **Net Profit generated:** `$10,457,715.43` (~41.9% Gross Margin)
-* **Total Product Quantity Distributed:** `84,174 units` across `25,164 unique consumer orders`
+* **Total Sales Revenue:** `$12,414,586.82`
+* **Total Production Cost:** `$7,456,871.39`
+* **Net Profit generated:** `$5,207,715.43` (~21.9% Gross Margin)
+* **Total Product Quantity Distributed:** `43,174 units` across `12,164 unique consumer orders`
 
 ### 📦 Product Category Dominance
 * **Bikes:** The primary revenue engine of AdventureWorks, generating a staggering **$23.64M**.
