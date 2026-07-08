@@ -1,82 +1,46 @@
-# 🚴 AdventureWorks Global Retail Business Intelligence Dashboard
+# 📊 Sales Performance & Trend Analysis
 
-## 📌 Project Overview
-This project delivers a comprehensive Business Intelligence solution designed to track, analyze, and optimize the global sales operations of **AdventureWorks**, a multinational manufacturing company specializing in cycling equipment, accessories, and apparel. Utilizing multi-year transaction data (2015–2017), this solution transforms complex transactional ecosystems into an interactive asset to support supply chain management, regional market expansions, and product lifecycle strategies.
+Welcome to the Sales Performance Analysis repository. This project explores historical sales data to uncover key trends, regional performance metrics, demographic contributions, and product return behaviors. 
 
----
+## 🎯 Executive Summary
 
-<img width="1385" height="781" alt="image" src="https://github.com/user-attachments/assets/14ff4c11-143b-4059-91b0-b2090493f0e1" />
-
----
-
-## 🛠️ Tools & Technologies
-* **BI Platform:** Microsoft Power BI / Excel
-* **Data Modeling:** Extended Star Schema (Snowflake elements for Product Hierarchies)
-* **Calculations & Metrics:** Advanced DAX (Time Intelligence, Profit Margins, Return Rates)
-* **Data Transformation:** Power Query ETL (Data type normalization, multi-table consolidation)
-* **Documentation:** Markdown
-
-## 🏗️ Data Architecture & Relationship Model
-
-The structural backbone of this AdventureWorks BI solution relies on an optimized relational database design that blends elements of **Star Schema** and **Snowflake Schema** methodologies. Fact tables hold numeric transaction variables, while dimension tables radiate outwards to supply descriptive context, ensuring clear filter propagation and minimized data redundancy.
-
-### 👥 Data Relationships & Structural Cardinality
-
-The relationship flow moves seamlessly from lookups (Dimension Tables) down into operational facts (Fact Tables) through strict **Many-to-One (*:1)** configurations:
-
-| Upstream / Dimension Table | Downstream / Fact or Sub-Dim Table | Cardinality | Join Key / Common Attribute | Filter Direction |
-| :--- | :--- | :--- | :--- | :--- |
-| **AdventureWorks_Calendar** | **AdventureWorks_Sales** | `1:*` | `Date` ➡️ `OrderDate` | Single (Calendar filters Sales) |
-| **AdventureWorks_Customers** | **AdventureWorks_Sales** | `1:*` | `CustomerKey` | Single (Customers filters Sales) |
-| **AdventureWorks_Territories** | **AdventureWorks_Sales** | `1:*` | `SalesTerritoryKey` ➡️ `TerritoryKey` | Single (Territories filters Sales) |
-| **AdventureWorks_Products** | **AdventureWorks_Sales** | `1:*` | `ProductKey` | Single (Products filters Sales) |
-| **AdventureWorks_Territories** | **AdventureWorks_Returns** | `1:*` | `SalesTerritoryKey` ➡️ `TerritoryKey` | Single (Territories filters Returns) |
-| **AdventureWorks_Products** | **AdventureWorks_Returns** | `1:*` | `ProductKey` | Single (Products filters Returns) |
-| **Product_Categories** | **Product_Subcategories** | `1:*` | `ProductCategoryKey` | Single (Categories filters Subcategories) |
-| **Product_Subcategories** | **AdventureWorks_Products** | `1:*` | `ProductSubcategoryKey` | Single (Subcategories filters Products) |
-
-### ⚡ Architectural Optimization Highlights
-
-* **Snowflaked Product Hierarchy:** Product definitions are normalized through a cascading schema sequence (`Product_Categories` ➡️ `Product_Subcategories` ➡️ `AdventureWorks_Products`). This structure guarantees normalized data integrity while minimizing the storage footprint of data lookups.
-* **Bi-Trifurcated Sales Fact Architecture:** The transactional ledger consists of independent year-by-year splits (2015, 2016, 2017) seamlessly handled by Power BI's structural model layer, connecting uniform join keys back to primary dimension blocks.
-* **Dual-Fact Integration:** The architecture bridges two distinct metrics systems—**Sales** (for commercial health) and **Returns** (for quality and risk monitoring)—without introducing complex cross-filtering ambiguity.
-* **Strict Unidirectional Filter Flow:** All filtering paths move exclusively in a one-way path down from context dimensions into transactional values. This ensures predictable DAX engine computation profiles and explicitly eliminates circular or ambiguous querying paths.
+The analysis provides a comprehensive look at sales trajectories, highlighting critical anomalies, top-performing regions, and key product influencers. [cite_start]Notably, total sales (`Sum of Product_SP`) reached **1,24,00,120.14**[cite: 253], successfully exceeding the target goal of **52,03,576.56**.
 
 ---
 
-## 📈 High-Impact Business Metrics (Derived)
+## 📈 Key Findings
 
-Through full integration of the relational schema, the business performance across the active lifecycle yields the following key baselines:
+### Sales Trends & Anomalies
+* **Overall Trend:** Total sales trended downward, resulting in a 38.26% decrease between January 1, 2015, and December 6, 2017.
+* **Periods of Growth:** A significant uptrend began on July 8, 2015, rising by 18.61% (2,508.73) over 4.57 months.
+* **Steepest Incline:** The fastest growth occurred between July 8, 2015, and November 25, 2015, with sales jumping from 13,480.49 to 15,989.22.
+* **Anomalies:** The most significant anomaly was recorded on January 3, 2017, reaching a high peak value of 28,365.70.
 
-### 💰 Core Financial Performance
-* **Total Sales Revenue:** `$12,414,586.82`
-* **Total Production Cost:** `$7,456,871.39`
-* **Net Profit generated:** `$5,207,715.43` (~21.9% Gross Margin)
-* **Total Product Quantity Distributed:** `43,174 units` across `12,164 unique consumer orders`
+### Geographic Performance
+Australia dominates the sales landscape, showing the largest gap between revenue generation and product returns.
 
-### 📦 Product Category Dominance
-* **Bikes:** The primary revenue engine of AdventureWorks, generating a staggering **$23.64M**.
-* **Accessories:** High transaction velocity volume generating **$906.6K**.
-* **Clothing:** An emerging segment contributing **$365.4K**.
+| Region | Performance Insight | Sales Volume (`Product_SP`) |
+| :--- | :--- | :--- |
+| **Australia** | Highest performing region, accounting for 35.25% of total sales. | [cite_start]43,67,552.89 [cite: 93] |
+| **Canada** | Lowest performing region among the tracked territories. | [cite_start]9,23,324.84 [cite: 93] |
 
-### 🌍 Regional Market Performance
-* **North America:** The **United States** leads as the single largest market with **$7.93M** in revenue, followed closely by **Canada ($1.76M)**.
-* **Asia-Pacific:** **Australia** represents a major high-performing region, contributing **$7.41M** in total revenue.
-* **Europe:** Driven collectively by the **United Kingdom ($2.90M)**, **Germany ($2.52M)**, and **France ($2.36M)**.
+> **Note:** Australia's sales volume was 373.02% higher than Canada's. Across all 7 regions, sales ranged from 9.23 Lakhs to 43.67 Lakhs.
 
----
-
-## 🔍 Core Visual & Analytical Features
-
-### 1. Executive Sales Performance Page
-* **Time-Intelligence Trajectories:** Analyzes sales momentum from January 1, 2015, through December 6, 2017, tracking year-over-year (YoY) revenue and margin trends.
-* **Geographical Mapping:** Tracks performance across regions, allowing executives to filter operations by Continents (North America, Europe, Pacific).
-
-### 2. Product Quality & Reverse Logistics Page
-* **Defect & Return Tracking:** Monitors the global **Return Rate of 2.17%** (1,828 total units returned).
-* **Risk Management:** Isolates specific high-return product subcategories or territories to flag supply chain issues or design flaws.
-
-### 3. Customer Demographics Deep-Dive
-* **Income & Profession Alignment:** Segments order quantity and product affinity by occupational classes (Professional, Management, Skilled Manual) and annual income brackets to optimize targeting for premium bicycle categories.
+### Demographic Breakdown
+* **Top Segment:** The **60 - 80 age group** generated the highest sales at 58,77,342.06, contributing 47.40% to the total revenue pool. 
+* **Following Segments:** The 40 - 60 and 80 - 100 age groups followed in sales volume.
+* **Lowest Segment:** The 100 - 120 age group contributed the least, with total sales at 3,694.95.
 
 ---
+
+## 🔄 Return Analysis & Influencers
+
+### Product Returns by Month
+There is a demonstrated negative correlation between overall sales and return quantities.
+
+* [cite_start]**Peak Returns:** July and August tied for the highest return quantities at 23 items each[cite: 178, 179], followed closely by September.
+* [cite_start]**Lowest Returns:** February recorded the lowest return volume with only 2 items[cite: 121].
+
+### Key Drivers of Sales
+The top driver for increasing sales value is specific product subcategories:
+* [cite_start]**Primary Influencer:** The `Mountain Bikes` subcategory [cite: 203] is the strongest influencer, increasing sales the most (by an average of 1,757.98).
